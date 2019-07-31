@@ -1,27 +1,31 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Pace calculator"/>
+    <Calculator msg="Pace calculator" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Calculator from "./components/Calculator.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    HelloWorld
+    Calculator
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-size: 20px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #235024;
   margin-top: 60px;
 }
+  p {
+    margin: 10px;
+  }
 </style>
