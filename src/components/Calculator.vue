@@ -50,6 +50,15 @@ export default {
       minutes: 0,
       seconds: 0,
       unitOptions: ["km", "miles"],
+      sectionMapping: {
+        hours: "time",
+        minutes: "time",
+        seconds: "time",
+        distance: "distance",
+        paceMinutes: "pace",
+        paceSeconds: "pace"
+      },
+      latestInputs: [],
       unit: "km",
       paceMinutes: 0,
       paceSeconds: 0
@@ -58,6 +67,8 @@ export default {
   methods: {
     update(event) {
       this[event.target.id] = event.target.value;
+      const sectionName = this.sectionMapping[event.target.id];
+      this.updateLatestInputs(sectionName);
       this.calculate();
     },
     calculate() {
@@ -69,6 +80,20 @@ export default {
       if (secondsPace) {
         this.paceMinutes = Math.trunc(secondsPace / 60);
         this.paceSeconds = Math.round(secondsPace % 60);
+      }
+    },
+    updateLatestInputs(sectionName) {
+      if (this.latestInputs.length > 1) {
+        if (this.latestInputs[1] !== sectionName) {
+          this.latestInputs.shift();
+          this.latestInputs.push(sectionName);
+        }
+      } else if (
+        (this.latestInputs.length === 1 &&
+          this.latestInputs[0] !== sectionName) ||
+        this.latestInputs.length === 0
+      ) {
+        this.latestInputs.push(sectionName);
       }
     },
     toggleUnit() {
@@ -84,7 +109,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 input {
-  width: 14px;
+  width: 28px;
   margin: 3px 3px 3px 6px;
   border: none;
   font-size: 20px;
