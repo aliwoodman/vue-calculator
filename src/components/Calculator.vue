@@ -16,11 +16,11 @@
       </p>
       <p>
         <input :value="hours" @change="update" id="hours" />
-        <span>Hrs</span>
+        <span>hrs</span>
         <input :value="minutes" @change="update" id="minutes" />
-        <span>Mins</span>
+        <span>mins</span>
         <input :value="seconds" @change="update" id="seconds" />
-        <span>Secs</span>
+        <span>secs</span>
       </p>
     </div>
     <div class="section">
@@ -29,9 +29,10 @@
       </p>
       <p>
         <input :value="paceMinutes" @change="update" id="paceMinutes" />
-        <span>Mins</span>
+        <span>mins</span>
         <input :value="paceSeconds" @change="update" id="paceSeconds" />
-        <span>Secs</span>
+        <span>secs</span>
+        <span> /{{ unit === "miles" ? "mile" : unit }}</span>
       </p>
     </div>
   </div>
@@ -49,7 +50,11 @@ export default {
       hours: 0,
       minutes: 0,
       seconds: 0,
+      paceMinutes: 0,
+      paceSeconds: 0,
+      unit: "km",
       unitOptions: ["km", "miles"],
+      latestInputs: [],
       sectionMapping: {
         hours: "time",
         minutes: "time",
@@ -57,21 +62,38 @@ export default {
         distance: "distance",
         paceMinutes: "pace",
         paceSeconds: "pace"
-      },
-      latestInputs: [],
-      unit: "km",
-      paceMinutes: 0,
-      paceSeconds: 0
+      }
     };
   },
   methods: {
     update(event) {
-      this[event.target.id] = event.target.value;
+      this[event.target.id] =
+        event.target.value === "" ? "0" : event.target.value;
       const sectionName = this.sectionMapping[event.target.id];
       this.updateLatestInputs(sectionName);
       this.calculate();
     },
     calculate() {
+      if (
+        this.latestInputs.includes("distance") &&
+        this.latestInputs.includes("time")
+      ) {
+        this.calculatePace();
+      }
+      if (
+        this.latestInputs.includes("distance") &&
+        this.latestInputs.includes("pace")
+      ) {
+        this.calculateTime();
+      }
+      if (
+        this.latestInputs.includes("pace") &&
+        this.latestInputs.includes("time")
+      ) {
+        this.calculateDistance();
+      }
+    },
+    calculatePace() {
       const totalSeconds =
         parseInt(this.seconds) +
         parseInt(this.minutes * 60) +
@@ -81,6 +103,25 @@ export default {
         this.paceMinutes = Math.trunc(secondsPace / 60);
         this.paceSeconds = Math.round(secondsPace % 60);
       }
+    },
+    calculateTime() {
+      const totalPaceSeconds =
+        parseInt(this.paceMinutes * 60) + parseInt(this.paceSeconds);
+      const totalSeconds = totalPaceSeconds * this.distance;
+      this.hours = Math.trunc(totalSeconds / 60 / 60);
+      this.minutes = Math.trunc((totalSeconds / 60) % 60);
+      this.seconds = Math.trunc(
+        (totalSeconds / 60 - Math.trunc(totalSeconds / 60)) * 60
+      );
+    },
+    calculateDistance() {
+      const totalPaceSeconds =
+        parseInt(this.paceMinutes * 60) + parseInt(this.paceSeconds);
+      const totalSeconds =
+        parseInt(this.seconds) +
+        parseInt(this.minutes * 60) +
+        parseInt(this.hours * 60 * 60);
+      this.distance = (totalSeconds / totalPaceSeconds).toFixed(1);
     },
     updateLatestInputs(sectionName) {
       if (this.latestInputs.length > 1) {
@@ -109,10 +150,11 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 input {
-  width: 28px;
+  width: 30px;
   margin: 3px 3px 3px 6px;
   border: none;
   font-size: 20px;
+  text-align: right;
 }
 button {
   font-size: 20px;
