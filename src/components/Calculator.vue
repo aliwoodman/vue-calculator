@@ -98,8 +98,12 @@ export default {
         parseInt(this.seconds) +
         parseInt(this.minutes * 60) +
         parseInt(this.hours * 60 * 60);
-      const secondsPace = totalSeconds / this.distance;
-      if (secondsPace) {
+
+      if (parseInt(this.distance) === 0 || parseInt(totalSeconds) === 0) {
+        this.paceMinutes = 0;
+        this.paceSeconds = 0;
+      } else {
+        const secondsPace = totalSeconds / this.distance;
         this.paceMinutes = Math.trunc(secondsPace / 60);
         this.paceSeconds = Math.round(secondsPace % 60);
       }
@@ -117,11 +121,16 @@ export default {
     calculateDistance() {
       const totalPaceSeconds =
         parseInt(this.paceMinutes * 60) + parseInt(this.paceSeconds);
-      const totalSeconds =
-        parseInt(this.seconds) +
-        parseInt(this.minutes * 60) +
-        parseInt(this.hours * 60 * 60);
-      this.distance = (totalSeconds / totalPaceSeconds).toFixed(1);
+
+      if (totalPaceSeconds === 0) {
+        this.distance = 0;
+      } else {
+        const totalSeconds =
+          parseInt(this.seconds) +
+          parseInt(this.minutes * 60) +
+          parseInt(this.hours * 60 * 60);
+        this.distance = (totalSeconds / totalPaceSeconds).toFixed(1);
+      }
     },
     updateLatestInputs(sectionName) {
       if (this.latestInputs.length > 1) {
