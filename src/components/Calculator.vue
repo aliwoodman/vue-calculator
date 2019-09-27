@@ -6,7 +6,12 @@
         Distance
       </p>
       <div id="distance-container">
-        <input :value="distance" @change="update" id="distance" />
+        <input
+          id="distance"
+          :value="distance"
+          @change="update"
+          @click="selectAll"
+        />
         <button @click="toggleUnit">{{ unit }}</button>
       </div>
     </div>
@@ -15,11 +20,21 @@
         Time
       </p>
       <div>
-        <input :value="hours" @change="update" id="hours" />
+        <input id="hours" :value="hours" @change="update" @click="selectAll" />
         <span>hrs</span>
-        <input :value="minutes" @change="update" id="minutes" />
+        <input
+          :value="minutes"
+          @change="update"
+          id="minutes"
+          @click="selectAll"
+        />
         <span>mins</span>
-        <input :value="seconds" @change="update" id="seconds" />
+        <input
+          id="seconds"
+          :value="seconds"
+          @change="update"
+          @click="selectAll"
+        />
         <span>secs</span>
       </div>
     </div>
@@ -28,9 +43,19 @@
         Pace
       </p>
       <div>
-        <input :value="paceMinutes" @change="update" id="paceMinutes" />
+        <input
+          id="paceMinutes"
+          :value="paceMinutes"
+          @change="update"
+          @click="selectAll"
+        />
         <span>mins</span>
-        <input :value="paceSeconds" @change="update" id="paceSeconds" />
+        <input
+          id="paceSeconds"
+          :value="paceSeconds"
+          @change="update"
+          @click="selectAll"
+        />
         <span>secs</span>
         <span> /{{ unit === "miles" ? "mile" : unit }}</span>
       </div>
@@ -72,6 +97,10 @@ export default {
       const sectionName = this.sectionMapping[event.target.id];
       this.updateLatestInputs(sectionName);
       this.calculate();
+    },
+    selectAll(event) {
+      const input = document.getElementById(event.target.id);
+      input.select();
     },
     calculate() {
       if (
