@@ -1,39 +1,39 @@
 <template>
-  <div class="hello">
+  <div class="calculator">
     <h1>{{ msg }}</h1>
     <div class="section">
       <p>
         Distance
       </p>
-      <p id="distance-container">
+      <div id="distance-container">
         <input :value="distance" @change="update" id="distance" />
         <button @click="toggleUnit">{{ unit }}</button>
-      </p>
+      </div>
     </div>
     <div class="section">
       <p>
         Time
       </p>
-      <p>
+      <div>
         <input :value="hours" @change="update" id="hours" />
         <span>hrs</span>
         <input :value="minutes" @change="update" id="minutes" />
         <span>mins</span>
         <input :value="seconds" @change="update" id="seconds" />
         <span>secs</span>
-      </p>
+      </div>
     </div>
     <div class="section">
       <p>
         Pace
       </p>
-      <p>
+      <div>
         <input :value="paceMinutes" @change="update" id="paceMinutes" />
         <span>mins</span>
         <input :value="paceSeconds" @change="update" id="paceSeconds" />
         <span>secs</span>
         <span> /{{ unit === "miles" ? "mile" : unit }}</span>
-      </p>
+      </div>
     </div>
   </div>
 </template>
@@ -170,12 +170,6 @@ button {
   border-radius: 3px;
   background-color: #235024;
   color: #ffffff;
-}
-
-#distance-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .section {

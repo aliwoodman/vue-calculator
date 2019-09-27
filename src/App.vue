@@ -25,7 +25,7 @@ export default {
   color: #235024;
   margin-top: 60px;
 }
-  p {
-    margin: 10px;
-  }
+p {
+  margin: 10px;
+}
 </style>
