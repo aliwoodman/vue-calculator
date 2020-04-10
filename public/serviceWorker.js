@@ -4,12 +4,11 @@ self.addEventListener("install", function(e) {
       return cache.addAll([
         "/",
         "/index.html",
-        "/css/app.095a27f9.css",
-        "/js/app.a2deb0df.js",
-        "/js/chunk-vendors.b33916fc.js",
-        "/__/firebase/6.3.4/firebase-app.js",
-        "/__/firebase/init.js",
-        "/favicon.ico"
+        "/favicon.ico",
+        "/refresh.png",
+        "/css/app.css",
+        "/js/app.js",
+        "/js/chunk-vendors.js",
       ]);
     })
   );
