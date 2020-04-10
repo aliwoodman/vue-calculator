@@ -1,6 +1,11 @@
 <template>
   <div class="calculator">
-    <h1>{{ msg }}</h1>
+    <img
+      alt="runner gif"
+      src="../../public/runner.gif"
+      style="width: 64px; height: 64px"
+    />
+    <div class="title">{{ msg }}</div>
     <div class="section">
       <p>
         Distance
@@ -90,40 +95,40 @@
 </template>
 
 <script>
-  const CHAR_WIDTH = 12;
-  const initialState = () => ({
-    distance: 5,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-    paceMinutes: 0,
-    paceSeconds: 0,
-    unit: "km",
-    latestInputs: ["distance"],
-    unitOptions: ["km", "miles"],
-    sectionMapping: {
-      hours: "time",
-      minutes: "time",
-      seconds: "time",
-      distance: "distance",
-      paceMinutes: "pace",
-      paceSeconds: "pace"
-    },
-    inputStyles: {
-      margin: "3px 3px 3px 6px",
-      width: "max-content",
-      border: "none",
-      fontSize: "20px",
-      textAlign: "right",
-    }
-  });
-  export default {
+const CHAR_WIDTH = 12;
+const initialState = () => ({
+  distance: 5,
+  hours: 0,
+  minutes: 0,
+  seconds: 0,
+  paceMinutes: 0,
+  paceSeconds: 0,
+  unit: "km",
+  latestInputs: ["distance"],
+  unitOptions: ["km", "miles"],
+  sectionMapping: {
+    hours: "time",
+    minutes: "time",
+    seconds: "time",
+    distance: "distance",
+    paceMinutes: "pace",
+    paceSeconds: "pace"
+  },
+  inputStyles: {
+    margin: "3px 3px 3px 6px",
+    width: "max-content",
+    border: "none",
+    fontSize: "20px",
+    textAlign: "right"
+  }
+});
+export default {
   name: "HelloWorld",
   props: {
     msg: String
   },
   data: function() {
-    return initialState()
+    return initialState();
   },
   methods: {
     update(event) {
@@ -220,7 +225,7 @@
           : this.unitOptions[0];
     },
     getInputWidth(text) {
-      return `${text.toString().length * CHAR_WIDTH}px`
+      return `${text.toString().length * CHAR_WIDTH}px`;
     }
   }
 };
@@ -239,6 +244,11 @@ button {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+}
+.title {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 </style>

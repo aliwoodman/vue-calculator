@@ -6,6 +6,7 @@ self.addEventListener("install", function(e) {
         "/index.html",
         "/favicon.ico",
         "/refresh.png",
+        "/runner.gif",
         "/css/app.css",
         "/js/app.js",
         "/js/chunk-vendors.js",
