@@ -20,5 +20,12 @@ yarn build
 yarn lint
 ```
 
+### Firebase deployment
+```
+yarn build
+firebase serve (optional - check changes)
+firebase deploy -m [DEPLOY-MESSAGE]
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

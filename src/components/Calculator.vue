@@ -11,6 +11,7 @@
           :value="distance"
           @change="update"
           @click="selectAll"
+          v-bind:style="[inputStyles, { width: this.getInputWidth(distance) }]"
         />
         <button @click="toggleUnit">{{ unit }}</button>
       </div>
@@ -20,13 +21,20 @@
         Time
       </p>
       <div>
-        <input id="hours" :value="hours" @change="update" @click="selectAll" />
+        <input
+          id="hours"
+          :value="hours"
+          @change="update"
+          @click="selectAll"
+          v-bind:style="[inputStyles, { width: this.getInputWidth(hours) }]"
+        />
         <span>hrs</span>
         <input
+          id="minutes"
           :value="minutes"
           @change="update"
-          id="minutes"
           @click="selectAll"
+          v-bind:style="[inputStyles, { width: this.getInputWidth(minutes) }]"
         />
         <span>mins</span>
         <input
@@ -34,6 +42,7 @@
           :value="seconds"
           @change="update"
           @click="selectAll"
+          v-bind:style="[inputStyles, { width: this.getInputWidth(seconds) }]"
         />
         <span>secs</span>
       </div>
@@ -48,6 +57,10 @@
           :value="paceMinutes"
           @change="update"
           @click="selectAll"
+          v-bind:style="[
+            inputStyles,
+            { width: this.getInputWidth(paceMinutes) }
+          ]"
         />
         <span>mins</span>
         <input
@@ -55,40 +68,62 @@
           :value="paceSeconds"
           @change="update"
           @click="selectAll"
+          v-bind:style="[
+            inputStyles,
+            { width: this.getInputWidth(paceSeconds) }
+          ]"
         />
         <span>secs</span>
         <span> /{{ unit === "miles" ? "mile" : unit }}</span>
+      </div>
+    </div>
+    <div class="section">
+      <div>
+        <img
+          @click="resetCalculator"
+          src="../../public/refresh.png"
+          style="width: 24px"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
+  const CHAR_WIDTH = 12;
+  const initialState = () => ({
+    distance: 5,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+    paceMinutes: 0,
+    paceSeconds: 0,
+    unit: "km",
+    latestInputs: ["distance"],
+    unitOptions: ["km", "miles"],
+    sectionMapping: {
+      hours: "time",
+      minutes: "time",
+      seconds: "time",
+      distance: "distance",
+      paceMinutes: "pace",
+      paceSeconds: "pace"
+    },
+    inputStyles: {
+      margin: "3px 3px 3px 6px",
+      width: "max-content",
+      border: "none",
+      fontSize: "20px",
+      textAlign: "right",
+    }
+  });
+  export default {
   name: "HelloWorld",
   props: {
     msg: String
   },
   data: function() {
-    return {
-      distance: 0,
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
-      paceMinutes: 0,
-      paceSeconds: 0,
-      unit: "km",
-      unitOptions: ["km", "miles"],
-      latestInputs: [],
-      sectionMapping: {
-        hours: "time",
-        minutes: "time",
-        seconds: "time",
-        distance: "distance",
-        paceMinutes: "pace",
-        paceSeconds: "pace"
-      }
-    };
+    return initialState()
   },
   methods: {
     update(event) {
@@ -175,11 +210,17 @@ export default {
         this.latestInputs.push(sectionName);
       }
     },
+    resetCalculator() {
+      Object.assign(this.$data, initialState());
+    },
     toggleUnit() {
       this.unit =
         this.unit === this.unitOptions[0]
           ? this.unitOptions[1]
           : this.unitOptions[0];
+    },
+    getInputWidth(text) {
+      return `${text.toString().length * CHAR_WIDTH}px`
     }
   }
 };
@@ -187,13 +228,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-input {
-  width: 30px;
-  margin: 3px 3px 3px 6px;
-  border: none;
-  font-size: 20px;
-  text-align: right;
-}
 button {
   font-size: 20px;
   border-radius: 3px;
@@ -202,6 +236,9 @@ button {
 }
 
 .section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   margin-bottom: 30px;
 }
 </style>
