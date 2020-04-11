@@ -1,0 +1,20 @@
+{
+  "short_name": "Pace calculator",
+  "name": "Pace calculator",
+  "description": "A minimalist calculator to return your distance, time or pace. Given two of these values it will calculate the third!",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "https://vue-pace-calculator.web.app/",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}
