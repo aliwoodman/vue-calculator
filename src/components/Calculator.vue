@@ -3,7 +3,7 @@
     <img
       alt="runner gif"
       src="../../public/runner.gif"
-      style="width: 64px; height: 64px"
+      style="width: 8vh"
     />
     <div class="title">{{ msg }}</div>
     <div class="section">
@@ -87,7 +87,7 @@
         <img
           @click="resetCalculator"
           src="../../public/refresh.png"
-          style="width: 24px"
+          style="width: 4vh"
         />
       </div>
     </div>
@@ -95,7 +95,6 @@
 </template>
 
 <script>
-const CHAR_WIDTH = 12;
 const initialState = () => ({
   distance: 5,
   hours: 0,
@@ -118,8 +117,7 @@ const initialState = () => ({
     margin: "3px 3px 3px 6px",
     width: "max-content",
     border: "none",
-    fontSize: "20px",
-    textAlign: "right"
+    textAlign: "right",
   }
 });
 export default {
@@ -225,8 +223,8 @@ export default {
           : this.unitOptions[0];
     },
     getInputWidth(text) {
-      return `${text.toString().length * CHAR_WIDTH}px`;
-    }
+      return `${text.toString().length * window.innerHeight * 0.02}px`;
+    },
   }
 };
 </script>
@@ -234,7 +232,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 button {
-  font-size: 20px;
   border-radius: 3px;
   background-color: #235024;
   color: #ffffff;
@@ -247,8 +244,8 @@ button {
   margin-bottom: 20px;
 }
 .title {
-  font-size: 40px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  font-size: 6vh;
 }
 </style>

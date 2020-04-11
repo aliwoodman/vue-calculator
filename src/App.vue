@@ -16,16 +16,28 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  font-size: 20px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #235024;
-  margin-top: 60px;
-}
-p {
-  margin: 10px;
-}
+  #app {
+    font-family: "Avenir", Helvetica, Arial, sans-serif;
+    font-size: 3vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #235024;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  p {
+    margin: 10px;
+  }
+  button {
+    font-family: inherit;
+    font-size: inherit;
+  }
+  input {
+    font-family: inherit;
+    font-size: inherit;
+  }
 </style>
