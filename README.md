@@ -1,5 +1,14 @@
 # vue-calculator
 
+## Description
+
+A simple distance/speed/time calculator. No need to specify which value you're trying to calculate - it looks at the last two inputs and automatically calculates the value for the third, minimising clicks 🥳
+
+It's a PWA so can be added to homescreen and works offline: http://vue-pace-calculator.web.app/
+
+## Demo
+
+[demo-pace-calculator](demo/pace-calculator.gif)
 ## Project setup
 ```
 yarn install
