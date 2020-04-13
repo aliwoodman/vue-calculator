@@ -115,10 +115,10 @@ const initialState = () => ({
   },
   inputStyles: {
     margin: "3px 3px 3px 6px",
-    width: "max-content",
     border: "none",
     textAlign: "right",
-  }
+  },
+  windowHeight: window.innerHeight,
 });
 export default {
   name: "HelloWorld",
@@ -127,6 +127,9 @@ export default {
   },
   data: function() {
     return initialState();
+  },
+  mounted() {
+    window.addEventListener('resize', this.handleResize);
   },
   methods: {
     update(event) {
@@ -223,8 +226,14 @@ export default {
           : this.unitOptions[0];
     },
     getInputWidth(text) {
-      return `${text.toString().length * window.innerHeight * 0.02}px`;
+      return `${text.toString().length * this.windowHeight * 0.02}px`;
     },
+    handleResize() {
+      this.windowHeight = window.innerHeight;
+    },
+    beforeDestroy() {
+      window.removeEventListener('resize', this.handleResize);
+    }
   }
 };
 </script>
