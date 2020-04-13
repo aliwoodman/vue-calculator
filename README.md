@@ -9,6 +9,7 @@ It's a PWA so can be added to homescreen and works offline: http://vue-pace-calc
 ## Demo
 
 ![demo-pace-calculator](demo/pace-calculator.gif)
+
 ## Project setup
 ```
 yarn install
